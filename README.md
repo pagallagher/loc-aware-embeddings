@@ -82,15 +82,6 @@ Trade-offs and caveats
    dedicated geodesic handling for precise distance calculations.
   (see [7](https://en.wikipedia.org/wiki/Haversine_formula))
 
-Practical tips
---------------
-- Experiment with a small grid of scale factors (e.g., 0.1, 1, 10) and
-  evaluate retrieval precision/recall for your use case.
-- Use unit vectors for direction-only signals when absolute distance is
-  irrelevant. Use scaled km values when distance magnitude matters.
-- When computing neighbors, consider returning both embedding similarity and
-  geographic distance to let downstream logic balance them.
-
 Usage (in this repo)
 ---------------------
 - `main.py` provides `latlon_to_xyz(...)`, `get_top_k_similar(...)` and
@@ -120,7 +111,7 @@ inject geographic awareness into vector search. With careful scaling and
 normalization it helps produce results that balance both semantic similarity
 and spatial proximity. The example here is a simple implementation which drives
 scores toward the geographic target with a given shape and strength. This logic,
-however, extends beyond this and can be used for any desired weight and decay shape.
+however, extends beyond this and can be used for **any desired weight and decay shape.**
 
 References
 ----------
