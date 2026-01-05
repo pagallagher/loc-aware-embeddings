@@ -1,0 +1,12 @@
+[project]
+name = "loc-aware-embeddings"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy", 
+    "pandas",
+    "scikit-learn>=1.8.0",
+    "plotly"
+]
