@@ -34,7 +34,7 @@ How to add coordinates safely
   (see [5](https://scikit-learn.org/stable/modules/preprocessing.html#standardization-or-mean-removal-and-variance-scaling))
 3. Apply a scale/weight to the coordinate vector before concatenating with
    embeddings. This controls how much geography influences similarity.
-   - Small scale -> embeddings dominate; large scale -> location dominates.
+   - Small scale -> embeddings dominate vs. large scale -> location dominates.
 4. Normalize the final vectors (e.g., to unit length) before computing cosine
   similarity so magnitude differences don't skew results.
   (see [6](https://scikit-learn.org/stable/modules/metrics.html#cosine-similarity))
@@ -53,9 +53,8 @@ After (with Cartesian coords):
 
 ![With geographic coords](plots/geo.png)
 
-The examples in this repo demonstrate a before/after effect: the "No
-geographic coords" plot shows neighbors found using embeddings only; the
-"With Cartesian coords" plot shows neighbors found after concatenating
+The examples in this repo demonstrate a before/after effect: the "Before" plot shows neighbors found using embeddings only, and the
+"After" plot shows neighbors found after concatenating
 standardized Cartesian coordinates to each embedding. Latitude/longitude are
 mapped to Cartesian (ECEF) coordinates using a simple spherical-earth
 approximation:
@@ -88,7 +87,7 @@ Practical tips
 - Experiment with a small grid of scale factors (e.g., 0.1, 1, 10) and
   evaluate retrieval precision/recall for your use case.
 - Use unit vectors for direction-only signals when absolute distance is
-  irrelevant; use scaled km values when distance magnitude matters.
+  irrelevant. Use scaled km values when distance magnitude matters.
 - When computing neighbors, consider returning both embedding similarity and
   geographic distance to let downstream logic balance them.
 
