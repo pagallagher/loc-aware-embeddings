@@ -13,7 +13,7 @@ Cartesian coordinates (x,y,z) derived from lat/lon gives the model an explicit
 spatial signal so similarity comparisons can respect geographic proximity as
 well as embedding-space similarity.
 
-Consumer decision research frames shopping as a multi-stage process (search/browse, evaluation, then purchase) and shows that transaction costs like shipping are largely stage-dependent: they exert little influence during initial browsing but become decisive at checkout, often triggering cart abandonment ([1](https://en.wikipedia.org/wiki/Consumer_behaviour), [2](https://en.wikipedia.org/wiki/Transaction_cost), [3](https://baymard.com/blog/checkout-usability)). By surfacing spatial signals earlier—for example, proximity-based availability, localized pricing, or shipping/pickup estimates—systems can reveal transaction-relevant information during the search/evaluation phase and reduce surprise at checkout. Augmenting embeddings with geographic coordinates therefore not only improves relevance for location-sensitive tasks but also enables operational signals that can improve conversion and reduce abandonment.
+Consumer decision research frames shopping as a multi-stage process (search/browse, evaluation, then purchase) and shows that transaction costs like shipping are largely stage-dependent: they exert little influence during initial browsing but become decisive at checkout, often triggering cart abandonment ([1](https://en.wikipedia.org/wiki/Consumer_behaviour), [2](https://en.wikipedia.org/wiki/Transaction_cost), [3](https://baymard.com/blog/checkout-usability)). By surfacing spatial signals earlier, such as proximity-based availability, localized pricing, or shipping/pickup estimates, systems can reveal transaction-relevant information during the search/evaluation phase and reduce surprise at checkout. Augmenting embeddings with geographic coordinates therefore not only improves relevance for location-sensitive tasks but also enables operational signals that can improve conversion and reduce abandonment.
 
 
 What this helps with
@@ -77,7 +77,7 @@ Trade-offs and caveats
 - Adding coordinates increases vector dimensionality and memory/compute cost.
 - If not scaled/standardized properly, coordinates can overwhelm the
   embeddings or be ignored entirely.
- - Cartesian coords capture Euclidean/geocentric proximity — for short
+ - Cartesian coords capture Euclidean/geocentric proximity. For short
    distances this approximates great-circle distance, but consider haversine or
    dedicated geodesic handling for precise distance calculations.
   (see [7](https://en.wikipedia.org/wiki/Haversine_formula))
