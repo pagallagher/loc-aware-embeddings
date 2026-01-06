@@ -35,8 +35,7 @@ How to add coordinates safely
 3. Apply a scale/weight to the coordinate vector before concatenating with
    embeddings. This controls how much geography influences similarity.
    - Small scale -> embeddings dominate vs. large scale -> location dominates.
-4. Normalize the final vectors (e.g., to unit length) before computing cosine
-  similarity so magnitude differences don't skew results.
+4. Normalize the final vectors (e.g., to unit length) before computing similarity
   (see [6](https://scikit-learn.org/stable/modules/metrics.html#cosine-similarity))
 
 
