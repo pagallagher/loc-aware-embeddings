@@ -16,6 +16,14 @@ well as embedding-space similarity.
 Consumer decision research frames shopping as a multi-stage process (search/browse, evaluation, then purchase) and shows that transaction costs like shipping are largely stage-dependent: they exert little influence during initial browsing but become decisive at checkout, often triggering cart abandonment ([1](https://en.wikipedia.org/wiki/Consumer_behaviour), [2](https://en.wikipedia.org/wiki/Transaction_cost), [3](https://baymard.com/blog/checkout-usability)). By surfacing spatial signals earlier, such as proximity-based availability, localized pricing, or shipping/pickup estimates, systems can reveal transaction-relevant information during the search/evaluation phase and reduce surprise at checkout. Augmenting embeddings with geographic coordinates therefore not only improves relevance for location-sensitive tasks but also enables operational signals that can improve conversion and reduce abandonment.
 
 
+**O(n) complexity benefit:** For brute-force similarity search, computing cosine similarity once on (m+3)-dimensional vectors is more efficient than a two-stage "top-k then rerank" approach:
+- Single-pass cost: **O(n·(m+3))**
+- Two-stage cost: **O(n·m) + O(k·(m+3))**
+- Single-pass wins when k < 3n/(m+3), which holds for realistic k values (k ≪ 3890 in practice when n=1M, m=768)
+- Two-stage adds extra costs: second pass, heap operations, broken cache locality
+- Exception: for ANN-based retrieval (HNSW, FAISS, IVF), reranking is preferred because extra dimensions degrade index efficiency
+
+
 What this helps with
 ---------------------
  - Surface geographic neighbors that are semantically similar.
@@ -23,6 +31,8 @@ What this helps with
    for latency-sensitive applications.
  - Improve results for latency-sensitive tasks where location matters (recommendations,
   local clustering, geospatial search).
+ - **Reduce latency in brute-force search** by folding coordinates into a single similarity pass instead of multi-stage reranking (O(n·(m+3)) vs O(n·m) + O(k·(m+3))).
+ - **Simplify pipelines** without sacrificing performance: better cache locality and sequential memory access than two-pass approaches.
 
 How to add coordinates safely
 -----------------------------
